@@ -1,12 +1,10 @@
 // Add imports above this line
 import { galleryItems } from './gallery-items';
-
-import SimpleLightbox from "simplelightbox";
-import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";
 // Change code below this line
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 console.log(galleryItems);
-
 
 const container = document.querySelector(".gallery");
 console.log(galleryItems);
@@ -30,44 +28,12 @@ function createMarkup(arr) {
     .join("");
 
   return res;
-}
+};
+container.style.listStyle = "none";      
 container.insertAdjacentHTML("beforeend", createMarkup(galleryItems));
 
-// add click
+// add SimpleLightbox
 let lightbox = new SimpleLightbox('.gallery a', { 
     captionsData: 'alt',
   captionDelay: '250',
 });
-// container.addEventListener("click", handelClick);
-// function handelClick(event) {
-//   event.preventDefault();
-
-//   if (event.target === event.currentTarget) {
-//     return;
-//   }
-//   const modalImg = event.target.closest(".gallery__link").getAttribute("href");
-  // console.log(modalImg);
-
-//   const instance = basicLightbox.create(
-//     `
-//   <img class="gallery__image" src="${modalImg}" alt="${modalImg.description}">
-//   `,
-//     {
-//       onShow: () => {
-//         document.addEventListener("keydown", handelKeydown);
-//       },
-//       onClose: () => {
-//         document.removeEventListener("keydown", handelKeydown);
-//       },
-//     }
-//   );
-//   instance.show();
-
-//   function handelKeydown(event) {
-//     console.log("close")
-//     if (event.code === "Escape") {
-//       return instance.close();
-//     }
-//     return console.log("no close");
-//   }
-// }

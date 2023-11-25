@@ -44,6 +44,6 @@ player.setCurrentTime(getValue).then(function(seconds) {
         });
         // ------------------------------------------------------------------------
         
-        player.on("timeupdate", throttledSaveTime);
         const throttledSaveTime = throttle(onPlay, 1000);
+        player.on("timeupdate", throttledSaveTime);
         

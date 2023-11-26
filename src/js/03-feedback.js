@@ -46,26 +46,31 @@ auditInfo();
 form.addEventListener('input', handleInput);
 function handleInput(event) {
   event.preventDefault();
-  const formInfo = {
-    email: emailInput.value,
-    message: messageInput.value,
-  };
-  save(FORM_KEY, formInfo);
-  console.log('formInfo', formInfo);
-
-  auditInfo();
-}
+  edSaveFormInfo();
+ }
 // ------------------------------------------------------------------------
 
 // // -----------------------------------------------------------------------
 form.addEventListener('submit', evt => {
   evt.preventDefault();
   let parseInfo = load(FORM_KEY);
-  if (parseInfo) {
+  if (emailInput.value === '' || messageInput.value === '') {
+    alert ("введи дані");
+  }else{
     console.log('console', parseInfo);
 
     localStorage.removeItem(FORM_KEY), form.reset();
   }
 });
-const throttledSaveFormInfo = throttle(handleInput, 500);
-form.addEventListener('input', throttledSaveFormInfo);
+
+ const edSaveFormInfo = throttle(() => {
+  
+    if(emailInput.value !== '' || messageInput.value !== ''){
+  const formInfo = {
+    email: emailInput.value,
+    message: messageInput.value,
+  };
+  save(FORM_KEY, formInfo);
+  console.log('formInfo', formInfo);
+      console.log("Scroll handler call every 500ms");
+  }}, 500)
